@@ -38,9 +38,20 @@ curl http://localhost:8765/health        # Windows PowerShell: Invoke-WebRequest
 ### 4. Register the MCP server in VS Code
 Create `.vscode/mcp.json` (template: `mcp/mcp.json.example`):
 ```json
-{ "servers": { "jmeter-mcp": { "type": "http", "url": "http://localhost:8080/mcp" } } }
+{
+	"servers": {
+		"jmeter-mcp": {
+			"type": "http",
+			"url": "http://localhost:8080/mcp"
+		},
+		"dynatrace-mcp": {
+			"type": "http",
+			"url": "<your-approved-dynatrace-mcp-endpoint>"
+		}
+	}
+}
 ```
-Start the server from the MCP view or the Command Palette (`MCP: List Servers`).
+Replace `<your-approved-dynatrace-mcp-endpoint>` with the exact MCP endpoint provided by your Dynatrace administrator or integration owner; it must be the MCP server URL, not just the tenant URL. Keep the registered name `dynatrace-mcp` to match `agents/dynatrace-monitor.agent.md`. Configure the approved authentication method through the MCP integration's secure setup; do not put API tokens in this file or chat. Start the servers from the MCP view or the Command Palette (`MCP: List Servers`).
 
 ### 5. Put your input in `Inputs/`
 Drop a Postman collection (plus environment), a HAR file, or a recorded JMX there. To try the solution first, copy the files from `samplefiles/`.
