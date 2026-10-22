@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "jmeter-mcp": {
+      "type": "http",
+      "url": "http://<server-host>:8080/mcp"
+    }
+  }
+}
