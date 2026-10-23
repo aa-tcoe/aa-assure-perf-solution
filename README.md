@@ -1,4 +1,4 @@
-# Aasure: End-to-End Performance Testing for VS Code Agent Mode
+# AAasure: End-to-End Performance Testing for VS Code Agent Mode
 
 Markdown agents for performance NFR creation, Postman/HAR/JMX analysis and scripting, approved smoke/load execution, read-only Dynatrace MCP monitoring, and evidence-based RCA reporting. Offline drafting does not authorize test execution.
 
@@ -16,7 +16,7 @@ Markdown agents for performance NFR creation, Postman/HAR/JMX analysis and scrip
 ### 1. Get the project
 Clone or unzip it and open the project root folder in VS Code (the folder that contains `agents/`).
 
-This checkout stores eight agent definitions in `agents/`. VS Code's default workspace discovery location is `.github/agents/`; use your team's configured agent location or publish all eight definitions there before invoking Aasure. The orchestrator and its seven specialists must all be discoverable. Agent definitions inherit the selected runtime model rather than pinning a model name.
+This checkout stores eight agent definitions in `agents/`. VS Code's default workspace discovery location is `.github/agents/`; use your team's configured agent location or publish all eight definitions there before invoking AAasure. The orchestrator and its seven specialists must all be discoverable. Agent definitions inherit the selected runtime model rather than pinning a model name.
 
 ### 2. Run the startup script
 | OS | Command (from the project root) |
@@ -56,12 +56,12 @@ Replace `<your-approved-dynatrace-mcp-endpoint>` with the exact MCP endpoint pro
 ### 5. Put your input in `Inputs/`
 Drop a Postman collection (plus environment), a HAR file, or a recorded JMX there. To try the solution first, copy the files from `samplefiles/`.
 
-### 6. Call @Aasure
-Open Copilot Chat, switch to **Agent** mode, pick **Aasure** and ask. Aasure extracts provided paths and scope, asks only for missing stage inputs, bootstraps one run folder, and delegates to the appropriate specialists. Script-only, NFR-only, connection-only, and report-only requests never start tests. Smoke and load require explicit, scoped approval; load also requires an approved NFR/profile, matching passing smoke, and enforceable stop limits.
+### 6. Call @AAasure
+Open Copilot Chat, switch to **Agent** mode, pick **AAasure** and ask. AAasure extracts provided paths and scope, asks only for missing stage inputs, bootstraps one run folder, and delegates to the appropriate specialists. Script-only, NFR-only, connection-only, and report-only requests never start tests. Smoke and load require explicit, scoped approval; load also requires an approved NFR/profile, matching passing smoke, and enforceable stop limits.
 
 ### 7. Read the results
 Everything lands in `Results/<App>_<yyyyMMdd_HHmmss>/`:
-`Initial analysis.md`, `jmeter/api-test-plan.jmx`, `docs/run-manifest.json`, stage handoff packets, and stage-specific reports. NFRs use `docs/nfr.md` and `docs/nfr.json`; smoke/load evidence uses unique `results/smoke/attempt-NN/` and `results/load/attempt-NN/` folders. Telemetry goes under `monitoring/`; RCA uses `rca/rca-report.md` and `rca/metrics.json`. Only requested stages produce artifacts; earlier run folders retain their original layout.
+`Initial analysis.md`, `jmeter/<App>.jmx` (named after the application), `docs/run-manifest.json`, stage handoff packets, and stage-specific reports. NFRs use `docs/nfr.md` and `docs/nfr.json`; smoke/load evidence uses unique `results/smoke/attempt-NN/` and `results/load/attempt-NN/` folders. Telemetry goes under `monitoring/`; RCA uses `rca/rca-report.md` and `rca/metrics.json`. Only requested stages produce artifacts; earlier run folders retain their original layout.
 
 ## NFR Creation and Dynatrace Monitoring
 - `performance-nfr` derives measurable requirements and workload profiles from supplied evidence. Unknown draft values remain unresolved, not invented thresholds. Requirement approval and execution approval are separate gates.
@@ -78,7 +78,7 @@ Check dynatrace-mcp for my approved tenant, read-only, last 15 minutes; no load.
 Analyze an existing run's JTL, approved NFR, and monitoring evidence; do not rerun.
 ```
 
-The full routing, input, approval, bootstrap, and handoff contracts are in `agents/Aasure.agent.md`.
+The full routing, input, approval, bootstrap, and handoff contracts are in `agents/AAasure.agent.md`.
 
 ---
 
@@ -129,7 +129,7 @@ Point `url` in `mcp.json` at `http://<host>:8765/mcp`. The server has **no authe
 
 ## Folder structure
 ```
-agents/           Aasure + 7 specialists (publish/register for VS Code discovery)
+agents/           AAasure + 7 specialists (publish/register for VS Code discovery)
 startup/          start.ps1  start.bat  start.sh
 mcp/              jmeter_mcp_server.py  mcp.json.example
 samplefiles/      sample Postman, HAR and JMX

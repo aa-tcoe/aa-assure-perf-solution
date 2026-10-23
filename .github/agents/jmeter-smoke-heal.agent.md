@@ -29,10 +29,10 @@ You are the approved smoke execution and scripting-repair specialist. Validate f
 3. Run non-GUI with 1 user/1 loop, scheduler timeout, finite request timeouts, and approved properties. Example local command from the run root (replace duration with the approved smoke cap):
 
   ```text
-  jmeter -n -t jmeter/api-test-plan.jmx -l results/smoke/attempt-01/results.jtl -j results/smoke/attempt-01/jmeter.log -e -o results/smoke/attempt-01/report -Jusers=1 -Jloops=1 -Jrampup=1 -Jduration=<approved-seconds>
+  jmeter -n -t <jmxPath from handoff, jmeter/<appName>.jmx> -l results/smoke/attempt-01/results.jtl -j results/smoke/attempt-01/jmeter.log -e -o results/smoke/attempt-01/report -Jusers=1 -Jloops=1 -Jrampup=1 -Jduration=<approved-seconds>
   ```
 
-4. Monitor only this run and stop safely under its approved policy. The bundled MCP `run_jmeter` is blocking and exposes no timeout/status/stop tool; do not claim it provides a live kill switch. Use it only if the required timeout/stop guarantees exist independently and are verified; otherwise return a blocker or request an approved local backend through Aasure.
+4. Monitor only this run and stop safely under its approved policy. The bundled MCP `run_jmeter` is blocking and exposes no timeout/status/stop tool; do not claim it provides a live kill switch. Use it only if the required timeout/stop guarantees exist independently and are verified; otherwise return a blocker or request an approved local backend through AAasure.
 5. Parse JTL, assertion failures, exit status, and logs. Missing/empty JTL, truncated execution, or skipped business samplers is not a pass. Separate auth/helper samples from business requests.
 6. Repair only evidenced script defects (variable scope, extractors, auth placement, headers, content type, dynamic data). Never mask application errors or change requirements. Assertion removal/weakening, target changes, or new auth/data assumptions require explicit coordinator approval before editing/rerunning.
 7. Bound the process to one initial attempt plus at most five repair-and-rerun cycles, also respecting the approved time window and attempt budget. Each plan change gets fresh offline validation/hash; update `docs/jmx-validation.md` before rerun. Persist cycle state so continuation does not reset the budget.
